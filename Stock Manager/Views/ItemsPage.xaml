@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Stock_Manager.Views.ItemsPage"
+             Title="Multiplo"
+             xmlns:local="clr-namespace:Stock_Manager.ViewModels" 
+             xmlns:effects="clr-namespace:Xamarin.KeyboardHelper;assembly=Xamarin.KeyboardHelper"
+             x:Name="BrowseItemsPage">
+    <ContentPage.ToolbarItems/>
+    <!--
+      x:DataType enables compiled bindings for better performance and compile time validation of binding expressions.
+      https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/data-binding/compiled-bindings
+    -->
+    <StackLayout Orientation="Vertical">
+        <ActivityIndicator IsVisible="{Binding Source={x:Reference BrowseItemsPage}, Path=IsBusy}" IsRunning="{Binding Source={x:Reference BrowseItemsPage}, Path=IsBusy}" Color="Black"/>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="user32.png"/>
+            <Label Text="Operatore" FontSize="12" FontAttributes="Bold" WidthRequest="60"/>
+            <Picker x:Name="User" FontSize="12" WidthRequest="60"/>
+        </StackLayout>
+        
+        <CollectionView x:Name="cwlArticoli" SelectionMode="Single"
+               SelectionChanged="cwlArticoliSelectionChanged" HeightRequest="350">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout HorizontalOptions="EndAndExpand">
+                        
+                        <SwipeView x:Name="swipeView"
+                           SwipeStarted="OnSwipeStarted"
+                           SwipeChanging="OnSwipeChanging"
+                           SwipeEnded="OnSwipeEnded"
+                           CloseRequested="OnCloseRequested">
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems>
+                                    <SwipeItem Text="Elimina"
+                                           IconImageSource="trash.png"
+                                           BackgroundColor="LightPink"
+                                           Invoked="OnDeleteSwipeItemInvoked"
+                                           />
+                                </SwipeItems>
+                                    </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Più"
+                                           IconImageSource="plusWhite.png"
+                                           BackgroundColor="DarkRed"
+                                           Invoked="OnAddSwipeItemInvoked"
+                                           />
+                                    <SwipeItem Text="Meno"
+                                           IconImageSource="minusWhite.png"
+                                           BackgroundColor="DarkOliveGreen"
+                                           Invoked="OnRemoveSwipeItemInvoked"
+                                           />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                                    <Grid HeightRequest="60"
+                                      WidthRequest="300"
+                                      BackgroundColor="Wheat">
+
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand" HeightRequest="60">
+
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" WidthRequest="300">
+                                            <Label Text="{Binding Id}" BackgroundColor="DarkRed" TextColor="Wheat" FontSize="18" WidthRequest="20" HorizontalTextAlignment="Center"/>
+                                            <Label Text="{Binding StockArticolo.Descrizione}" BackgroundColor="Wheat" TextColor="DarkRed" FontSize="18" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" WidthRequest="290"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                            <Label Text="{Binding StockArticolo.SkuFornitore}" FontAttributes="Bold"/>
+                                            <Label Text="{Binding StockArticolo.Sku}" FontAttributes="Italic"/>
+                                        </StackLayout>
+
+                                    </StackLayout>
+
+                                    <Label HeightRequest="60" WidthRequest="60" Text="{Binding Qta}" BackgroundColor="DarkRed" TextColor="Wheat" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30"/>
+                                </StackLayout>
+
+                            </Grid>
+                                </SwipeView>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="33*"/>
+                <ColumnDefinition Width="33*"/>
+                <ColumnDefinition Width="33*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Button Text="Azzera" x:Name="btnAzzera" Clicked="btnAzzera_Clicked" BackgroundColor="GhostWhite" TextColor="Black" Image="eraser.png" Grid.Row="0" Grid.Column="0" FontSize="11"/>
+            <Button Text="Carico" x:Name="btnCarico" Clicked="btnCarico_Clicked" BackgroundColor="DarkGreen" TextColor="white" Image="caricoWhite.png" Grid.Row="0" Grid.Column="1" FontSize="11"/>
+            <Button Text="Scarico" x:Name="btnScarico" Clicked="btnScarico_Clicked" BackgroundColor="DarkGoldenrod" TextColor="Black" Image="scarico.png" Grid.Row="0" Grid.Column="2" FontSize="9"/>
+        </Grid>
+        
+
+    </StackLayout>
+    
+</ContentPage>

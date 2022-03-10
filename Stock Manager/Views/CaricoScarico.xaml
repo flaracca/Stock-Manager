@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Stock_Manager.Views.CaricoScarico"
+             xmlns:effects="clr-namespace:Xamarin.KeyboardHelper;assembly=Xamarin.KeyboardHelper"
+             Title="Carico/Scarico"
+             x:Name="CaricoScaricoContentPage">
+    <ContentPage.ToolbarItems/>
+
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="1">
+            <!--ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="Black"/-->
+            <ActivityIndicator IsVisible="{Binding Source={x:Reference CaricoScaricoContentPage}, Path=IsBusy}" IsRunning="{Binding Source={x:Reference CaricoScaricoContentPage}, Path=IsBusy}" Color="Black"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="20*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+
+                <Entry x:Name="sku" Text="{Binding sku}" Grid.Row="0" Grid.Column="0" ClearButtonVisibility="WhileEditing" effects:KeyboardEffect.EnableKeyboard="True">
+                    <Entry.Effects>
+                        <effects:KeyboardEnableEffect/>
+                    </Entry.Effects>
+                </Entry>
+                
+                <Button Image="searchWhite.png" Grid.Row="0" Grid.Column="1" Command="{Binding searchSKU}" FontSize="Large"/>
+                <Button Image="eraserWhite.png" Grid.Row="0" Grid.Column="2" Clicked="Eraser_Clicked" Command="{Binding resetSKU}" FontSize="Large" BackgroundColor="Red"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="55*"/>
+                    <ColumnDefinition Width="10*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Label Text="Prodotto:" Grid.Row="0" Grid.Column="0" FontAttributes="Bold"/>
+                <Label Text="{Binding descrizione}" Grid.Row="0" Grid.Column="1" x:Name="labelDescrizione"/>
+
+                <Image Grid.Row="0" Grid.Column="2" Source="user32.png"/>
+                <Picker x:Name="User" Grid.Row="1" Grid.Column="2" FontSize="9" ItemsSource="{Binding UserPicker}"
+                        ItemDisplayBinding="{Binding codOper}"
+                        SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+                        SelectedIndex="{Binding SelectedIndexUser}"/>
+
+                <Label Text="Qtà attuale:" Grid.Row="1" Grid.Column="0" FontAttributes="Bold"/>
+                <Label Text="{Binding qtaAttuale}" Grid.Row="1" Grid.Column="1" x:Name="labelQtaAttuale"/>
+
+                <!--Ellipse x:Name="scannerStatus" Grid.Row="1" Grid.Column="2" WidthRequest="50" HeightRequest="50" Fill="{Binding scannerStatus}"/-->
+                <!--Image Source="scannerWhite16.png" x:Name="scannerStatus" Grid.Row="1" Grid.Column="2" WidthRequest="50" HeightRequest="50" BackgroundColor="LightSlateGray"/-->
+
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Button Image="minusWhite.png" Grid.Row="0" Grid.Column="0" Command="{Binding qtaDecrease}" BackgroundColor="DarkKhaki" FontSize="Large"/>
+                <Entry Text="{Binding qta}" Grid.Row="0" Grid.Column="1" Keyboard="Numeric" x:Name="labelQta">                
+                    
+                </Entry>        
+                <Button Image="plusWhite.png" Grid.Row="0" Grid.Column="2" Command="{Binding qtaIncrease}" BackgroundColor="DarkKhaki" FontSize="Large"/>
+
+            </Grid>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="33*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>                    
+                </Grid.RowDefinitions>
+
+                <Button Text="1" Grid.Row="0" Grid.Column="0" Command="{Binding qta1}" BackgroundColor="LightCoral" FontSize="Large"/>
+                <Button Text="2" Grid.Row="0" Grid.Column="1" Command="{Binding qta2}" BackgroundColor="LightCoral" FontSize="Large"/>
+                <Button Text="3" Grid.Row="0" Grid.Column="2" Command="{Binding qta3}" BackgroundColor="LightCoral" FontSize="Large"/>
+                <Button Text="4" Grid.Row="0" Grid.Column="3" Command="{Binding qta4}" BackgroundColor="LightCoral" FontSize="Large"/>
+
+                <Button Text="5" Grid.Row="1" Grid.Column="0" Command="{Binding qta5}" BackgroundColor="LightCoral" FontSize="Large"/>
+                <Button Text="6" Grid.Row="1" Grid.Column="1" Command="{Binding qta6}" BackgroundColor="LightCoral" FontSize="Large"/>
+                <Button Text="7" Grid.Row="1" Grid.Column="2" Command="{Binding qta7}" BackgroundColor="LightCoral" FontSize="Large"/>
+                <Button Text="8" Grid.Row="1" Grid.Column="3" Command="{Binding qta8}" BackgroundColor="LightCoral" FontSize="Large"/>
+
+                <Button Text="9" Grid.Row="2" Grid.Column="0" Command="{Binding qta9}" BackgroundColor="LightCoral" FontSize="Large"/>
+                <Button Text="0" Grid.Row="2" Grid.Column="1" Command="{Binding qta0}" BackgroundColor="LightCoral" FontSize="Large"/>
+                <Button Image="eraserWhite.png" Grid.Row="2" Grid.Column="2" Command="{Binding qtaDelete}" BackgroundColor="LightSteelBlue" FontSize="Large"/>
+                <Button Image="redoWhite.png" Grid.Row="2" Grid.Column="3" Command="{Binding qtaReset}" BackgroundColor="LightGreen" FontSize="Large"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                
+                <Button Text="Carico" x:Name="btnCarico" Image="caricoWhite.png" Grid.Row="0" Grid.Column="0" Command="{Binding carico}" BackgroundColor="DarkGreen" FontSize="Large"/>
+                <Button Text="Scarico" x:Name="btnScarico" Image="scaricoWhite.png" Grid.Row="0" Grid.Column="1" Command="{Binding scarico}" BackgroundColor="DarkGoldenrod" FontSize="Large"/>
+
+            </Grid>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

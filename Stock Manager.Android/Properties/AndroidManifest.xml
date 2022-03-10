@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:versionCode="1" android:versionName="1.0" package="srl.inside.stock_manager" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30" />
+	<!--<application android:label="Stock_Manager.Android" android:theme="@style/MainTheme"></application>-->
+	<application tools:replace="android:label,android:debuggable" android:label="Stock_Manager.Android" android:debuggable="true" android:theme="@style/MainTheme"></application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+</manifest>

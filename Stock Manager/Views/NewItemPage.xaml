@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Stock_Manager.Views.NewItemPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="Nuovo Articolo"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems/>
+    <ContentPage.Content>
+        <ScrollView>
+
+            <StackLayout Spacing="3" Padding="15">
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel" Image="redoWhite.png" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="red" IsVisible="{Binding CancelIsVisible}"></Button>
+                <Button Text="Save" Image="disketteWhite.png" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                </Grid>
+            
+                <Entry Text="{Binding skuFornitore, Mode=TwoWay}" FontSize="Medium" x:Name="skuFornitore" Placeholder="SKU Fornitore"/>
+            <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding skuInterno, Mode=TwoWay}" FontSize="Medium" x:Name="skuInterno" Placeholder="SKU interno" WidthRequest="200"/>
+                    <Button Text="Genera" x:Name="btnGenera" Command="{Binding GeneraBarcodeCommand}" WidthRequest="80" FontSize="12" BackgroundColor="Gold" TextColor="Black" ImageSource="barcode.png"/>
+            </StackLayout>
+            
+                <Editor Text="{Binding descrizione, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" Placeholder="Descrizione Articolo"/>
+
+                <ActivityIndicator IsVisible="False" IsRunning="True" Color="Black" x:Name="IsBusy"/>
+
+                <Button Text="Contiene..." Image="boxWhite.png"  FontAttributes="Bold" Command="{Binding BtnShowStackContiene}" BackgroundColor="LightBlue" TextColor="White"/>
+                <StackLayout>
+                    
+                    <Entry Text="{Binding contieneSkuFornitore, Mode=TwoWay}" FontSize="Medium" x:Name="contieneSkuFornitore" Placeholder="SKU Fornitore"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Quantità nella confezione" FontSize="Medium"/>
+                        <Entry x:Name="contenutoQta" Text="{Binding contenutoQta}" Keyboard="Numeric" WidthRequest="80"/>
+                    </StackLayout>
+                    
+                    
+                    
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Cancel" Image="redoWhite.png" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="red" IsVisible="{Binding CancelIsVisible}"></Button>
+                        <Button Text="Save" Image="disketteWhite.png" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    </StackLayout>
+                </StackLayout>
+        </StackLayout>
+
+
+        </ScrollView>
+    </ContentPage.Content>
+    
+</ContentPage>

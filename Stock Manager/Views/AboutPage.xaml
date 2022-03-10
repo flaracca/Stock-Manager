@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Stock_Manager.Views.AboutPage"
+             xmlns:vm="clr-namespace:Stock_Manager.ViewModels"
+             Title="Impostazioni">
+    <ContentPage.ToolbarItems/>
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                        <Image Source="warehouse.png" VerticalOptions="Center" HeightRequest="64" />
+                    </ContentView>
+                </StackLayout>
+            </StackLayout>
+            <ScrollView Grid.Row="1">
+                <StackLayout Orientation="Vertical" Padding="10,10,10,10" Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Versione 1.0.0" FontSize="Title"/>
+                </StackLayout>
+            </ScrollView>
+            
+        </Grid>
+
+        <StackLayout Orientation="Vertical">
+            <Label Text="Connessione utilizzata" />
+            <StackLayout Orientation="Vertical" RadioButtonGroup.GroupName="colors">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="lan.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand" />
+                    <RadioButton Value="Locale" x:Name="radioLocale" CheckedChanged="radioLocale_CheckedChanged" Content="Locale"/>
+                    
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="internet.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand" />
+                    <RadioButton Value="Internet" x:Name="radioInternet" CheckedChanged="radioInternet_CheckedChanged" Content="Internet"/>
+                    
+                </StackLayout>
+
+            </StackLayout>
+
+        </StackLayout>
+    </StackLayout>
+    
+    
+</ContentPage>
